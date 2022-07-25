@@ -9,24 +9,61 @@ using System.Web.Mvc;
 
 namespace HVC.Store.UI.Controllers {
     public class ProductsController:Controller {
-        public ViewResult Index() {
 
-            IList<Product> products = null;
-            using (var ctx = new HVCStoreDataContext()) {
-                products = ctx.products.ToList();
-            }
+        private readonly HVCStoreDataContext _ctx = new HVCStoreDataContext();
+        
+        public ViewResult Index() {
+            var products = _ctx.products.ToList();
             return View(products);
         }
 
         [HttpGet]
-        public ViewResult Add() {
-            return View();
+        public ViewResult AddEdit(int? id) {
+            Product product = new Product();
+            
+            if (id != null) {
+                product = _ctx.products.Find(id);
+            }
+            
+            return View(product);
         }
 
+        //[HttpGet]
+        //public ActionResult Edit(int id) {
+        //    var product = _ctx.products.Find(id);
+        //    return View(product);
+        //}
+
         [HttpPost]
-        public ViewResult Add(Product product) {
-            //todo add in the table
-            return View();
+        public ActionResult AddEdit(Product product) {
+
+            //TODO: validate fields
+            if (product.Id == 0) {
+                _ctx.products.Add(product);
+            } else {
+                _ctx.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            }
+            
+            _ctx.SaveChanges();
+            
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DelProd(int id) {
+            var product = _ctx.products.Find(id);
+
+            if (product == null) {
+                return HttpNotFound();
+            }
+
+            _ctx.products.Remove(product);
+            _ctx.SaveChanges();
+
+            return null;
+        }
+
+        protected override void Dispose(bool disposing) {
+            _ctx.Dispose();
         }
     }
 }
