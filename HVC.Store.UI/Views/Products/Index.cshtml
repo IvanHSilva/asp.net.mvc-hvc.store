@@ -2,11 +2,11 @@
 
 <h2> Listagem de Produtos</h2>
 
-<div>
-    <a href="~/Products/AddEdit">Novo Produto</a>
+<div class="mb-3 mt-3">
+    <a class="btn btn-outline-info" href="~/Products/AddEdit">Novo Produto</a>
 </div>
 
-<table>
+<table class="table table-striped table-hover table-responsive p-3">
     <tr>
     <thead>
         <tr>
@@ -27,9 +27,9 @@
                 <td>@prod.Quantity</td>
                 <td>@prod.Type</td>
                 <td>@prod.DateEntry</td>
-                <td>
-                    <a href="~/Products/AddEdit/@prod.Id">Editar</a>
-                    <button onclick="DelProd(@prod.Id, '@prod.Name')">Excluir</button>
+                <td> @*class="btn-group">*@
+                    <a class="btn btn-sm btn-outline-warning" href="~/Products/AddEdit/@prod.Id"><i class="fas fa-edit"></i> Editar</a>
+                    <button class="btn btn-sm btn-outline-danger" onclick="DelProd(@prod.Id, '@prod.Name')"><i class="fas fa-trash"></i> Excluir</button>
                 </td>
             </tr>
         }
@@ -37,33 +37,61 @@
 
 </table>
 
+<div data-id="0" class="modal" id="delModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Confirma a exclusão do produto <strong><span id="prodModal"></span></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button onclick="ConfirmDelProd()" type="button" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function DelProd(id, name) {
         //alert('Sem chance!')
         //var response = confirm('Deseja excluir o produto ' + name + '?')
-        let response = confirm(`Deseja excluir o produto ${name}?`)
-        //console.log(response)
-        if (response) {
-            //console.log(`Id ${id}`)
-            ConfirmDelProd(id)
-        }
+
+    //    let response = confirm(`Deseja excluir o produto ${name}?`)
+    //    //console.log(response)
+    //    if (response) {
+    //        //console.log(`Id ${id}`)
+    //        ConfirmDelProd(id)
+    //    }
+        $('#prodModal').text(name)
+        $('#delModal').data('id', id).modal('show')
     }
 
-    function ConfirmDelProd(id) {
+
+    function ConfirmDelProd() {
+        let id = $('#delModal').data('id');
+
         //XMLHttpRequest
         let xhr = new XMLHttpRequest();
         const url = `/Products/DelProd/${id}`
 
         xhr.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 404) {
-                alert('Produto não encontrado!')
+                $('#delModal').data('id', '0').modal('hide')
+                toastr.error('Produto não encontrado!', 'HVC Store')
+                //alert('Produto não encontrado!')
             }
             if (this.readyState === 4 && this.status === 200) {
                 let tr = document.querySelector(`#prod-${id}`)
                 if (tr != null) {
                     tr.remove()
                 }
-                alert('Produto excluído!')
+                $('#delModal').data('id', '0').modal('hide')
+                toastr.success('Produto excluído!', 'HVC Store')
+                //alert('Produto excluído!')
             }
         }
 
