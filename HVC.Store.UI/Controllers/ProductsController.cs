@@ -25,6 +25,10 @@ namespace HVC.Store.UI.Controllers {
                 product = _ctx.products.Find(id);
             }
             
+            var types = _ctx.prodtypes.ToList();
+            ViewBag.Types = types; //atalho para o ViewData
+            //ViewData["Types"] = types;
+
             return View(product);
         }
 

@@ -1,6 +1,12 @@
-﻿<h2>Adicionar Produto</h2>
+﻿@model HVC.Store.UI.Models.Product
+
+@{ViewBag.Title = $"{(Model.Id == 0 ? "Novo" : "Editar")} Produto";}
+
+<h2>@ViewBag.Title</h2>
+
 
 <form method="post">
+
     <div class="form-group">
         <label for="txtName">Nome:</label>
         <input class="form-control" type="text" name="name" id="txtName" value="@Model.Name" autofocus />
@@ -11,7 +17,16 @@
     </div>
     <div class="form-group">
         <label for="txtType">Tipo:</label>
-        <input class="form-control "type="text" name="type" id="txtType" value="@Model.Type" />
+        <select name="ProductTypeId" class="form-control">
+            <option value=""></option>
+            @foreach (HVC.Store.UI.Models.ProductType type in ViewBag.Types) {
+                <option @(type.Id == Model.ProductTypeId ? "selected" : "")
+                        value="@type.Id">
+                    @type.Name
+                    </option>
+                }
+        </select>
+        @*<input class="form-control "type="text" name="type" id="txtType" value="@Model.Type" />*@
     </div>
     <div class="form-group">
         <label for="txtQuant">Quantidade:</label>

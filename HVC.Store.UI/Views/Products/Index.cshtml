@@ -1,6 +1,10 @@
 ﻿@*@model List<HVC.Store.UI.Models.Product>*@
 
-<h2> Listagem de Produtos</h2>
+@{ViewBag.Title = "Listagem de Produtos";}
+
+<h2>@ViewBag.Title</h2>
+
+@*<h2> Listagem de Produtos</h2>*@
 
 <div class="mb-3 mt-3">
     <a class="btn btn-outline-info" href="~/Products/AddEdit">Novo Produto</a>
@@ -20,14 +24,15 @@
     </thead>
 
     <tbody>
-        @foreach (var prod in Model) {
+        @foreach (HVC.Store.UI.Models.Product prod in Model) {
             <tr id="prod-@prod.Id">
                 <td>@prod.Name</td>
                 <td>@prod.Price</td>
                 <td>@prod.Quantity</td>
-                <td>@prod.Type</td>
+                <td>@prod.ProductType.Name</td>
                 <td>@prod.DateEntry</td>
-                <td> @*class="btn-group">*@
+                <td>
+                    @*class="btn-group">*@
                     <a class="btn btn-sm btn-outline-warning" href="~/Products/AddEdit/@prod.Id"><i class="fas fa-edit"></i> Editar</a>
                     <button class="btn btn-sm btn-outline-danger" onclick="DelProd(@prod.Id, '@prod.Name')"><i class="fas fa-trash"></i> Excluir</button>
                 </td>
@@ -60,12 +65,12 @@
         //alert('Sem chance!')
         //var response = confirm('Deseja excluir o produto ' + name + '?')
 
-    //    let response = confirm(`Deseja excluir o produto ${name}?`)
-    //    //console.log(response)
-    //    if (response) {
-    //        //console.log(`Id ${id}`)
-    //        ConfirmDelProd(id)
-    //    }
+        //    let response = confirm(`Deseja excluir o produto ${name}?`)
+        //    //console.log(response)
+        //    if (response) {
+        //        //console.log(`Id ${id}`)
+        //        ConfirmDelProd(id)
+        //    }
         $('#prodModal').text(name)
         $('#delModal').data('id', id).modal('show')
     }
