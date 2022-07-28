@@ -9,37 +9,65 @@
 
     <div class="form-group">
         <label for="txtName">Nome:</label>
-        <input class="form-control" type="text" name="name" id="txtName" value="@Model.Name" autofocus />
+        @*<input class="form-control" type="text" name="name" id="txtName" value="@Model.Name" autofocus />*@
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "" })
+        @*<small>@Html.ValidationMessageFor(m => m.Name, "Nome deve ser digitado", new { @class = "text-danger" })</small>*@
+        <small>@Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })</small>
     </div>
+
     <div class="form-group">
         <label for="txtPrice">Preço:</label>
-        <input class="form-control" type="text" name="price" id="txtPrice" value="@Model.Price" />
+        @*<input class="form-control" type="text" name="price" id="txtPrice" value="@Model.Price" />*@
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+        <small>@Html.ValidationMessageFor(m => m.Price, null, new { @class = "text-danger" })</small>
     </div>
+
     <div class="form-group">
         <label for="txtType">Tipo:</label>
-        <select name="ProductTypeId" class="form-control">
-            <option value=""></option>
-            @foreach (HVC.Store.UI.Models.ProductType type in ViewBag.Types) {
-                <option @(type.Id == Model.ProductTypeId ? "selected" : "")
-                        value="@type.Id">
-                    @type.Name
+        @*<select name="ProductTypeId" class="form-control">
+                <option value=""></option>
+                @foreach (HVC.Store.UI.Models.ProductType type in ViewBag.Types) {
+                    <option @(type.Id == Model.ProductTypeId ? "selected" : "")
+                            value="@type.Id">
+                        @type.Name
                     </option>
                 }
-        </select>
+            </select>*@
+        @Html.DropDownListFor(m => m.ProductTypeId, new SelectList(ViewBag.Types, "Id", "Name"), "",
+                              new { @class = "form-control" })
+        <small>@Html.ValidationMessageFor(m => m.ProductTypeId, null, new { @class = "text-danger" })</small>
         @*<input class="form-control "type="text" name="type" id="txtType" value="@Model.Type" />*@
     </div>
+
     <div class="form-group">
         <label for="txtQuant">Quantidade:</label>
-        <input class="form-control" type="text" name="quantity" id="txtQuant" value="@Model.Quantity" />
+        @*<input class="form-control" type="text" name="quantity" id="txtQuant" value="@Model.Quantity" />*@
+        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+        <small>@Html.ValidationMessageFor(m => m.Quantity, null, new { @class = "text-danger" })</small>
     </div>
+
     <div class="form-group">
         <label for="txtDate">Data de Cadastro:</label>
-        <input class="form-control" type="text" name="dateentry" id="txtDate" value="@Model.DateEntry" />
+        @*<input class="form-control" type="text" name="dateentry" id="txtDate" value="@Model.DateEntry" />*@
+        @Html.TextBoxFor(m => m.DateEntry, new { @class = "form-control" })
+        <small>@Html.ValidationMessageFor(m => m.DateEntry, null, new { @class = "text-danger" })</small>
+    </div>
+
+    <div>
+        @* Checa todas as validações do form *@
+        @Html.ValidationSummary(true)
     </div>
 
     @*<input type="submit" value="Salvar"/>*@
     <div class="form-group p-3">
         <button class="btn btn-outline-success" type="submit">Salvar</button>
-        <a class="btn btn-outline-danger m-2" href="~/Products">Cancelar</a>
+        @*<a class="btn btn-outline-danger m-2" href="~/Products">Cancelar</a>*@
+        <a class="btn btn-outline-danger m-2" href="@Url.Action("Index")">Cancelar</a>
     </div>
 </form>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.validate.js"></script>
+}

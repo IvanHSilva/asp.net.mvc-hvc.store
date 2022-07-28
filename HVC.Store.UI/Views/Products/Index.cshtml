@@ -7,7 +7,7 @@
 @*<h2> Listagem de Produtos</h2>*@
 
 <div class="mb-3 mt-3">
-    <a class="btn btn-outline-info" href="~/Products/AddEdit">Novo Produto</a>
+    <a class="btn btn-outline-info" href="@Url.Action("AddEdit")">Novo Produto</a>
 </div>
 
 <table class="table table-striped table-hover table-responsive p-3">
@@ -33,7 +33,7 @@
                 <td>@prod.DateEntry</td>
                 <td>
                     @*class="btn-group">*@
-                    <a class="btn btn-sm btn-outline-warning" href="~/Products/AddEdit/@prod.Id"><i class="fas fa-edit"></i> Editar</a>
+                    <a class="btn btn-sm btn-outline-warning" href="@Url.Action("AddEdit", new {id=prod.Id})"><i class="fas fa-edit"></i> Editar</a>
                     <button class="btn btn-sm btn-outline-danger" onclick="DelProd(@prod.Id, '@prod.Name')"><i class="fas fa-trash"></i> Excluir</button>
                 </td>
             </tr>

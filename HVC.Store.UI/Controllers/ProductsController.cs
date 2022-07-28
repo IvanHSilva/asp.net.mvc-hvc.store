@@ -41,16 +41,23 @@ namespace HVC.Store.UI.Controllers {
         [HttpPost]
         public ActionResult AddEdit(Product product) {
 
-            //TODO: validate fields
-            if (product.Id == 0) {
-                _ctx.products.Add(product);
-            } else {
-                _ctx.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            if (ModelState.IsValid) {
+                if (product.Id == 0) {
+                    _ctx.products.Add(product);
+                }
+                else {
+                    _ctx.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                }
+
+                _ctx.SaveChanges();
+
+                return RedirectToAction("Index");
             }
-            
-            _ctx.SaveChanges();
-            
-            return RedirectToAction("Index");
+
+            var types = _ctx.prodtypes.ToList();
+            ViewBag.Types = types; //atalho para o ViewData
+
+            return View(product);
         }
 
         public ActionResult DelProd(int id) {
