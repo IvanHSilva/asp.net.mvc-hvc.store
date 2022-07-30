@@ -1,4 +1,5 @@
-﻿using HVC.Store.UI.Models;
+﻿using HVC.Store.UI.Infra.Helpers;
+using HVC.Store.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,6 +22,13 @@ namespace HVC.Store.UI.Data {
                 new Product() { Name = "Acendedor", Quantity = 2, Price = 5.0M, DateEntry = DateTime.Parse("01/10/2010"), ProductType = barbecue },
             }; 
             context.products.AddRange(products);
+
+            context.users.Add(new User() { 
+                Name = "Ivan Henriques",
+                EMail = "ivanhenriquessilva@gmail.com",
+                Password = "123456".Encrypt(),
+            });
+
             context.SaveChanges();
         }
     }

@@ -1,0 +1,45 @@
+﻿@*<nav class="navbar navbar-expand-lg bg-light">*@
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">HVC Store</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Products")">Produtos</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("About", "Home")">Sobre</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                @if (User.Identity.IsAuthenticated) {
+                    <li class="nav-link dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @User.Identity.Name
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Alterar Senha</a>
+                            <a class="dropdown-item" href="#">Meus Dados</a>
+                            <div class="dropdown-divider" href="#"></div>
+                            <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Sair (Logout)</a>
+                        </div>
+                    </li>
+                }
+                else {
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Login", "Account")">Login</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

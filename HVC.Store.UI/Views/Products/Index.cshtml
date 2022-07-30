@@ -27,10 +27,10 @@
         @foreach (HVC.Store.UI.Models.Product prod in Model) {
             <tr id="prod-@prod.Id">
                 <td>@prod.Name</td>
-                <td>@prod.Price</td>
-                <td>@prod.Quantity</td>
+                <td style="text-align: right">@prod.Price.ToString("F2")</td>
+                <td style="text-align: center">@prod.Quantity</td>
                 <td>@prod.ProductType.Name</td>
-                <td>@prod.DateEntry</td>
+                <td style="text-align: center">@prod.DateEntry.ToString("dd/MM/yyyy")</td>
                 <td>
                     @*class="btn-group">*@
                     <a class="btn btn-sm btn-outline-warning" href="@Url.Action("AddEdit", new {id=prod.Id})"><i class="fas fa-edit"></i> Editar</a>

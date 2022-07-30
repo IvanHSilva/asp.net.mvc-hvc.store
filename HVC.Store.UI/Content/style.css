@@ -21,6 +21,10 @@ label.is-invalid {
     color: #dc3545;
 }
 
+.footer-custom span {
+    color: #ffffff!important;
+}
+
 /*.container {
     width: auto;
     max-width: 680px;

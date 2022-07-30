@@ -1,13 +1,10 @@
 ﻿using HVC.Store.UI.Data;
 using HVC.Store.UI.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace HVC.Store.UI.Controllers {
+    [Authorize]
     public class ProductsController:Controller {
 
         private readonly HVCStoreDataContext _ctx = new HVCStoreDataContext();
