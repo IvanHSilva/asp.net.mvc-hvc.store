@@ -1,5 +1,6 @@
 ﻿using HVC.Store.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HVC.Store.Data.EF.Maps {
@@ -19,7 +20,10 @@ namespace HVC.Store.Data.EF.Maps {
             Property(c => c.EMail)
                 .HasColumnType("varchar")
                 .HasMaxLength(100)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                new IndexAnnotation(new IndexAttribute("UQ_dbo.Users.Email") { IsUnique = true })
+                );
             Property(c => c.Password)
                 .HasColumnType("char")
                 .HasMaxLength(88)

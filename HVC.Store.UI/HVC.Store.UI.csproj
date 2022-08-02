@@ -168,8 +168,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Data\DBInitializer.cs" />
-    <Compile Include="Data\HVCStoreDataContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -225,6 +223,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HVC.Store.Data\HVC.Store.Data.csproj">
+      <Project>{8d9814f2-881a-4edf-b004-327b01244a05}</Project>
+      <Name>HVC.Store.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HVC.Store.Domain\HVC.Store.Domain.csproj">
+      <Project>{4449695c-ae40-4e64-89b5-d584ff69c720}</Project>
+      <Name>HVC.Store.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

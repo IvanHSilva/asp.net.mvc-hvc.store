@@ -1,5 +1,5 @@
-﻿using HVC.Store.UI.Data;
-using HVC.Store.UI.Models;
+﻿using HVC.Store.Data.EF;
+using HVC.Store.Domain.Entities;
 using System.Linq;
 using System.Web.Mvc;
 

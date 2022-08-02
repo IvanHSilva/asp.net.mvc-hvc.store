@@ -56,10 +56,14 @@
     <Compile Include="EF\Maps\ProductMap.cs" />
     <Compile Include="EF\Maps\ProductTypeMap.cs" />
     <Compile Include="EF\Maps\UserMap.cs" />
+    <Compile Include="EF\Repositories\ProductRepositoryEF.cs" />
+    <Compile Include="EF\Repositories\ProductTypeRepositoryEF.cs" />
+    <Compile Include="EF\Repositories\UserRepositoryEF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="EF\Repositories\RepositoryEF.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

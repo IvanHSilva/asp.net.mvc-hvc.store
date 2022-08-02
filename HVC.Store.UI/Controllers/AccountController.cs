@@ -1,4 +1,4 @@
-﻿using HVC.Store.UI.Data;
+﻿using HVC.Store.Data.EF;
 using HVC.Store.UI.Infra.Helpers;
 using HVC.Store.UI.Models;
 using System.Linq;
