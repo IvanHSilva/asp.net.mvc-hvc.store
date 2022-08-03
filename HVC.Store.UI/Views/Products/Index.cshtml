@@ -1,4 +1,5 @@
 ﻿@*@model List<HVC.Store.UI.Models.Product>*@
+@using HVC.Store.UI.ViewModels.Products.Index
 
 @{ViewBag.Title = "Listagem de Produtos";}
 
@@ -24,12 +25,12 @@
     </thead>
 
     <tbody>
-        @foreach (HVC.Store.UI.Models.Product prod in Model) {
+        @foreach (ProductIndexVM prod in Model) {
             <tr id="prod-@prod.Id">
                 <td>@prod.Name</td>
                 <td style="text-align: right">@prod.Price.ToString("F2")</td>
                 <td style="text-align: center">@prod.Quantity</td>
-                <td>@prod.ProductType.Name</td>
+                <td>@prod.ProdType</td>
                 <td style="text-align: center">@prod.DateEntry.ToString("dd/MM/yyyy")</td>
                 <td>
                     @*class="btn-group">*@
