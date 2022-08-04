@@ -1,9 +1,7 @@
-﻿using HVC.Store.Data.EF.Repositories;
-using HVC.Store.Domain.Contracts.Repositories;
+﻿using HVC.Store.Domain.Contracts.Repositories;
 using HVC.Store.Domain.Entities;
 using HVC.Store.UI.ViewModels.Products.AddEdit;
 using HVC.Store.UI.ViewModels.Products.AddEdit.Maps;
-using HVC.Store.UI.ViewModels.Products.Index;
 using HVC.Store.UI.ViewModels.Products.Index.Maps;
 using System.Web.Mvc;
 
@@ -11,9 +9,14 @@ namespace HVC.Store.UI.Controllers {
     [Authorize]
     public class ProductsController : Controller {
 
-        private readonly IProductRepository _prodRepo = new ProductRepositoryEF();
-        private readonly IProductTypeRepository _prodTypeRepo = new ProductTypeRepositoryEF();
-        
+        private readonly IProductRepository _prodRepo;
+        private readonly IProductTypeRepository _prodTypeRepo;
+
+        public ProductsController(IProductRepository prodRepo, IProductTypeRepository prodTypeRepo) {
+            _prodRepo = prodRepo;
+            _prodTypeRepo = prodTypeRepo;
+        }
+
         public ViewResult Index() {
             //var products = _prodRepo.Get();
 

@@ -1,13 +1,16 @@
-﻿using HVC.Store.Data.EF.Repositories;
-using HVC.Store.Domain.Contracts.Repositories;
+﻿using HVC.Store.Domain.Contracts.Repositories;
 using HVC.Store.UI.Infra.Helpers;
-using HVC.Store.UI.Models;
+using HVC.Store.UI.ViewModels.Account.Login;
 using System.Web.Mvc;
 using System.Web.Security;
 
 namespace HVC.Store.UI.Controllers {
     public class AccountController:Controller {
-        private readonly IUserRepository _userRepo = new UserRepositoryEF();
+        private readonly IUserRepository _userRepo;
+
+        public AccountController(IUserRepository userRepo) {
+            _userRepo = userRepo;
+        }
 
         [HttpGet]
         public ActionResult Login(string returnUrl) {

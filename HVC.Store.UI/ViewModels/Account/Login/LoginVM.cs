@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HVC.Store.UI.Models {
+namespace HVC.Store.UI.ViewModels.Account.Login {
     public class LoginVM {
         [Required(ErrorMessage = "E-Mail deve ser digitado!")]
         [StringLength(100, ErrorMessage = "E-Mail pode ter o máximo de 100 caracteres!")]
